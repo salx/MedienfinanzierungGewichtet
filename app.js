@@ -1,5 +1,5 @@
 (function(){
-
+console.log("here");
 	var margin = {top: 20, right: 20, bottom: 30, left: 40},
         width = 960 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
@@ -21,15 +21,15 @@
 
     // color Scale
     var color = d3.scale.ordinal()
-    	.rande(["#98abc5", "#6b486b", "#ff8c00"])
+    	.range(["#98abc5", "#6b486b", "#ff8c00"])
 
     //Axes
     var xAxis = d3.svg.axis()
-    	.scale(x)
+    	.scale(x0)
     	.orient("bottom");
 
     var yAxis = d3.svg.axis()
-    	.scale(y)
+    	.scale(y0)
     	.orient("left")
     	.tickFormat(".2s");//welche Argumente nimmt .format - versteh ich so nicht, Ausgabe ist in Mio.
 
@@ -40,7 +40,7 @@
     	.append("g")//welchen Sinn macht das, wenn nachher auch noch eine gruppe reinkommt?
     	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    data.csv("Medienfinanzierung2.csv", function(error, data){
+    d3.csv("Medienfinanzierung2.csv", function(error, data){
     	var mediaNames = d3.keys(data[0]).filter( function(key){ return key !== "Unternehmen"; } ); 
 
     	data.forEach(function(d){
@@ -81,12 +81,12 @@
     		.append("rect")
     		.attr("width", x1.rangeBand())
     		.attr("x", function(d){ return x1(d.name); })
-    		.attr("y", function(d){ return y(d.value); })
-    		.attr("height", function(d){ return height - y(d.value) })
+    		.attr("y", function(d){ return y0(d.value); })
+    		.attr("height", function(d){ return height - y0(d.value) })
     		.attr("fill", function(d){ return color(d.name); });
 
 
     })
 
 
-})
+})();
