@@ -1,19 +1,8 @@
-.curlyBrace { /*with credits to https://gist.github.com/alexhornbake/6005176*/
-			stroke: #000000;
-			stroke-width: 10px;
-			fill: none;
-		}
-
-		body {
-			font-family: Arial, Helvetica, sans-serif;
-			text-align: center;
-		}
-
-
+/*
 .y.axis path {
 	display: none;
 }
-
+*/
 
 /*
 g.x.axis {
