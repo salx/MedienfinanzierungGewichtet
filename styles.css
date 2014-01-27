@@ -31,17 +31,19 @@ text {
 }
 
 
+/*
 rect:hover {
 	border: 10px solid black;
 
 }
+*/
 
 
-/*
 rect:hover{
 	fill: orange;
 }
-*/
+
+
 .d3-tip {
 	line-height: 1;
 	font-weight: bold;

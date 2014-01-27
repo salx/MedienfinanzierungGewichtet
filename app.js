@@ -1,6 +1,17 @@
+/*
+Wieso sieht man die X-Ache nicht?
+Wie daten auf zweiter Ebene filtern (nur AT, nur Fernsehen bzw: Mitarbeiter und Umsatz trennen)
+SORTING
+y-Achse: Orientierungslinien - gepunktet/strichliert
+Legende
+Mouse-Over
+
+Vergleiche DE außerhalb der Grafik?
+
+*/
+
 (function(){
-console.log("here");
-	var margin = {top: 20, right: 20, bottom: 30, left: 40},
+	var margin = {top: 20, right: 20, bottom: 200, left: 70},
         width = 960 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
 
@@ -16,12 +27,12 @@ console.log("here");
     	.range([height, 0]);
 
     //second vertikal scale for mitarbeiter
-    //this I have to think about
-    //y1 = 
+    var y1 = d3.scale.linear()
+    	.range([height, 0]);
 
     // color Scale
     var color = d3.scale.ordinal()
-    	.range(["#98abc5", "#6b486b", "#ff8c00"])
+    	.range(["#98abc5", "#ff8c00"])
 
     //Axes
     var xAxis = d3.svg.axis()
@@ -31,9 +42,13 @@ console.log("here");
     var yAxis = d3.svg.axis()
     	.scale(y0)
     	.orient("left")
-    	.tickFormat(".2s");//welche Argumente nimmt .format - versteh ich so nicht, Ausgabe ist in Mio.
+    	//.tickFormat(d3.format(".2s"));//welche Argumente nimmt .format - versteh ich so nicht, Ausgabe ist in Mio.
 
-    var svg = d3.select("body")//wieso wird das nicht ausgeführt??
+    var yAxis2 = d3.svg.axis()
+    	.scale(y1)
+    	.orient("right")
+
+    var svg = d3.select("body")
     	.append("svg")
     	.attr("width", width + margin.left + margin.right)
     	.attr("height", height + margin.top + margin.bottom)
@@ -47,6 +62,8 @@ console.log("here");
     		d.mediaValues = mediaNames.map(function(name){ return {name: name, value: +d[name]}; }); 
     	});
 
+    	data.sort(function(a, b){ return b-a; });//wie die Werte angeben...
+
     	//set the domains
     	x0.domain(data.map(function(d) { return d.Unternehmen } ));
     	x1.domain(mediaNames).rangeRoundBands([0, x0.rangeBand()]); //check
@@ -55,8 +72,14 @@ console.log("here");
 
     	svg.append("g")
     		.attr("class", "x axis")
-    		.attr("transform", "translate(0," + height + ")")
-    		.call(xAxis);
+    		.attr("transform", "translate(-12," + (height + 7)+ ")")
+    		//.attr("transform", "translate(0,360)")
+    		.call(xAxis)
+    		.selectAll("text")
+    		.style("text-anchor", "end")
+    		.attr("transform", "rotate(-90)")
+    		.attr("dx", "-0.71em")
+			.attr("dy", "-0.31em");
 
     	svg.append("g")
     		.attr("class", "y axis")
@@ -66,7 +89,7 @@ console.log("here");
     		.attr("y", 6)
     		.attr("dy", "0.71em")
     		.style("text-anchor", "end")
-    		.text("Umsatz in Mio. Euro");
+    		.text("Umsatz in Mio. €");
 
     	var unternehmen = svg.selectAll(".unternehmen")
     		.data(data)
