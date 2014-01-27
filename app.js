@@ -40,7 +40,11 @@
     	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     data.csv("Medienfinanzierung2.csv", function(error, data){
-    	var mediaNames = 
+    	var mediaNames = d3.keys(data[0]).filter( function(key){ return key !== "Unternehmen"; } ); 
+
+    	data.forEach(function(d){
+    		d.mediaValues = mediaNames.map(function(name){ return {name: name, value: +d[name]}; }); 
+    	});
 
     })
 
