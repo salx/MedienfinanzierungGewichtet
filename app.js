@@ -3,9 +3,10 @@ Feedback Gerd
 
 Feedback Grafik:
 y-Achse: Orientierungslinien - gepunktet/strichliert gar nicht?
-TRennung DE-AT: wie am Besten? (eingekastelt?)
+Trennung DE-AT: wie am Besten? (eingekastelt?)
 
 Fragen SiFu:
+Wie kann ich die Zahlen f.d. Angetstellen im Mouse-Over ergänzen? Zahlen f. MitarbeiterInnen - also wieviele MA...
 LOKALISIERUNG: was muss ich tun?
 // hier steht, wie ich das format ändern kann, aber ich kapier's nicht ganz..und es funkt derzeit nicht.
     //https://groups.google.com/forum/#!topic/d3-js/NH90E7J7IUo
@@ -16,6 +17,7 @@ LOKALISIERUNG: was muss ich tun?
 Wie kann ich einen Radn um "background2" machen? das CSS wird zwar angewendet aber ist nicht sichtbar 
 
 TODO
+
 SORTING - aber das müsste eigentlich mit einer dritten Kategorie passieren
 
 */
@@ -59,15 +61,17 @@ SORTING - aber das müsste eigentlich mit einer dritten Kategorie passieren
     	.scale(y1)
     	.orient("left")
 
-    //var format = d3.format("0,000");
+    var format = d3.format("0,000");
     //var format = d3.format(".,2f")
 
     var tip = d3.tip()
         .attr("class", "d3-tip")
         .offset([-10,0])
         .html( function(d){
+            console.log(d)
             if (d.name === "Mitarbeiter"){
-                return "<text>2012</br> Umsatz pro MitarbeiterIn: " + (d3.round(d.value) ) + " €</text>"   
+
+                return "<text>2012</br> Umsatz pro MitarbeiterIn: " + format(d3.round(d.value) ) + " €</text>"   
             }else{
                 return "<text>2012</br>" + d.name + ": " + d.value + " Mio. €</text>"
             }
@@ -82,7 +86,7 @@ SORTING - aber das müsste eigentlich mit einer dritten Kategorie passieren
 
     svg.call(tip);
 
-    d3.csv("Medienfinanzierung6.csv", function(error, data){
+    d3.csv("Medienfinanzierung5.csv", function(error, data){
 
     	var mediaNames = d3.keys(data[0]).filter( function(key){ return key !== "Unternehmen"; } ); 
 
