@@ -94,13 +94,14 @@ Vergleiche DE außerhalb der Grafik?
 			.attr("dy", "-0.31em");
 		*/
 		
-
+        
 		svg.append( 'line' )
 			.attr("class", "line")
 			.attr("x0", 0 )
 			.attr("x1", width )
 			.attr("y1", half )
 			.attr("y2", half );
+
 
     	svg.append("g")
     		.attr("class", "y axis")
@@ -140,7 +141,7 @@ Vergleiche DE außerhalb der Grafik?
     		    if( d.name === 'Mitarbeiter' ) {
                     return half+1;
     		    } else {
-    		    	return y0(d.value);
+    		    	return y0(d.value)-1;
     		    }
     			
     		})

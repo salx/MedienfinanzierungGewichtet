@@ -23,10 +23,6 @@ g.x.axis {
 	shape-rendering: crispEdges;
 }
 
-line{
-
-}
-
 text {
 	font: 14px sans-serif;
 	font-family: Arial;
@@ -43,7 +39,7 @@ rect:hover {
 */
 
 svg {
-	border: 1px solid red;
+	border: 1px solid black;
 }
 
 rect:hover{
@@ -82,7 +78,8 @@ rect:hover{
 .line{
 	fill: none;
 	stroke: #000;
-	stroke-width: 1px;
+	stroke-width: 2px;
+	shape-rendering: crispEdges;
 }
 
 .axis line {
