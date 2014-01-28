@@ -6,20 +6,24 @@ y-Achse: Orientierungslinien - gepunktet/strichliert gar nicht?
 TRennung DE-AT: wie am Besten? (eingekastelt?)
 
 Fragen SiFu:
+LOKALISIERUNG: was muss ich tun?
+// hier steht, wie ich das format ändern kann, aber ich kapier's nicht ganz..und es funkt derzeit nicht.
+    //https://groups.google.com/forum/#!topic/d3-js/NH90E7J7IUo
+    // https://github.com/mbostock/d3/issues/1492
+    // hier ist ein guter Tipp http://stackoverflow.com/questions/17573797/formatting-y-axis
+    // hier ebenfalls zum Lokalisierungs-Problem
+
 Wie kann ich einen Radn um "background2" machen? das CSS wird zwar angewendet aber ist nicht sichtbar 
 
 TODO
 SORTING - aber das müsste eigentlich mit einer dritten Kategorie passieren
-Verhältnisse MA/Umsatz, statt MA absolut?
-andere ÖR (ARD, NDR etc.?) - siehe tabele 3
-Wie DE abheben?
 
 */
 
 (function(){
 	var margin = {top: 100, right: 20, bottom: 20, left: 70},
         width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom,
+        height = 750 - margin.top - margin.bottom,
         half = height/2-1;
 
     //ordinal scale for medienunternehmen
@@ -55,10 +59,19 @@ Wie DE abheben?
     	.scale(y1)
     	.orient("left")
 
+    //var format = d3.format("0,000");
+    //var format = d3.format(".,2f")
+
     var tip = d3.tip()
         .attr("class", "d3-tip")
         .offset([-10,0])
-        .html( function(d){console.log(d); return "<text>2012</br>" + d.name+ ": " + d.value + "</text>"  } )
+        .html( function(d){
+            if (d.name === "Mitarbeiter"){
+                return "<text>2012</br> Umsatz pro MitarbeiterIn: " + (d3.round(d.value) ) + " €</text>"   
+            }else{
+                return "<text>2012</br>" + d.name + ": " + d.value + " Mio. €</text>"
+            }
+        })
 
     var svg = d3.select("body")
     	.append("svg")
@@ -69,7 +82,7 @@ Wie DE abheben?
 
     svg.call(tip);
 
-    d3.csv("Medienfinanzierung3.csv", function(error, data){
+    d3.csv("Medienfinanzierung6.csv", function(error, data){
 
     	var mediaNames = d3.keys(data[0]).filter( function(key){ return key !== "Unternehmen"; } ); 
 
@@ -109,8 +122,8 @@ Wie DE abheben?
 		
         svg.append("rect")
             .attr("class", "background1")
-            .attr("x", 518)
-            .attr("y", -margin.top)
+            .attr("x", 495)
+            .attr("y", -margin.top+10)
             .attr("height", height+margin.top + margin.bottom)
             .attr("width", 372);
 
@@ -123,12 +136,12 @@ Wie DE abheben?
 
         svg.append("text")
             .attr("y", height)
-            .attr("x", 230)
+            .attr("x", 200)
             .text("ÖSTERREICH");
 
         svg.append("text")
             .attr("y", height)
-            .attr("x", 630)
+            .attr("x", 700)
             .text("DEUTSCHLAND");
 
     	svg.append("g")
@@ -147,11 +160,11 @@ Wie DE abheben?
     		.call(yAxis2)
        		.append("text")
     		.attr("transform", "rotate(-90)")
-            .attr("x", -108)
+            .attr("x", -160)
     		.attr("y", 6)
     		.attr("dy", "0.71em")
     		.style("text-anchor", "end")
-    		.text("Angestellte");
+    		.text("Umsatz / Angestellte");
 
 
     	var unternehmen = svg.selectAll(".unternehmen")
@@ -184,7 +197,7 @@ Wie DE abheben?
     		})
     		.attr("fill", function(d){ return color(d.name); })
             .on("mouseover", tip.show)
-            //.on("mouseout", tip.hide
+            .on("mouseout", tip.hide);
             //remove de-tip.n divs...die behindern das neue mousover! daher hier noc ohne mouseout.
 
     	unternehmen.append( 'text' )
