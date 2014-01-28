@@ -1,13 +1,19 @@
 /*
+Feedback Gerd
 
-y-Achse: Orientierungslinien - gepunktet/strichliert
-Mouse-Over
-DE- und AT trennen (Hintergrund?, Schrift?)
+Feedback Grafik:
+y-Achse: Orientierungslinien - gepunktet/strichliert gar nicht?
+TRennung DE-AT: wie am Besten?
+Farben? BIlder, Icvons?
 
-SORTING
+Fragen SiFu:
+ Wie drehe ich da das hover ab??, wie mache ich einen Rand links?
+
+TODO
+SORTING - aber das müsste eigentlich mit einer dritten Kategorie passieren
 Vergleiche DE außerhalb der Grafik?
 Verhältnisse MA/Umsatz, statt MA absolut?
-andere ÖR (ARD, NDR etc.?)
+andere ÖR (ARD, NDR etc.?) - siehe tabele 3
 Wie DE abheben?
 
 */
@@ -103,7 +109,13 @@ Wie DE abheben?
 			.attr("dy", "-0.31em");
 		*/
 		
-        
+        svg.append("rect")
+            .attr("class", "background1")
+            .attr("x", 518)
+            .attr("y", -margin.top)
+            .attr("height", height+margin.top + margin.bottom)
+            .attr("width", 372);
+
 		svg.append( 'line' )
 			.attr("class", "line")
 			.attr("x0", 0 )

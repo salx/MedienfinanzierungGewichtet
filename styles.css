@@ -42,6 +42,11 @@ svg {
 	border: 1px solid black;
 }
 
+.background1{
+	fill: #e0e0e0;
+	border: 1px solid black;
+}
+
 rect:hover{
 	fill: orange;
 }
