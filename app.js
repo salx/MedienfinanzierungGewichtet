@@ -1,12 +1,14 @@
 /*
-Wieso sieht man die X-Ache nicht?
-Wie daten auf zweiter Ebene filtern (nur AT, nur Fernsehen bzw: Mitarbeiter und Umsatz trennen)
-SORTING
-y-Achse: Orientierungslinien - gepunktet/strichliert
-Legende
-Mouse-Over
 
+y-Achse: Orientierungslinien - gepunktet/strichliert
+Mouse-Over
+DE- und AT trennen (Hintergrund?, Schrift?)
+
+SORTING
 Vergleiche DE außerhalb der Grafik?
+Verhältnisse MA/Umsatz, statt MA absolut?
+andere ÖR (ARD, NDR etc.?)
+Wie DE abheben?
 
 */
 
@@ -49,12 +51,19 @@ Vergleiche DE außerhalb der Grafik?
     	.scale(y1)
     	.orient("left")
 
+    var tip = d3.tip()
+        .attr("class", "d3-tip")
+        .offset([-10,-10])
+        .html( function(d){console.log(d); return "<text>2012</br>" + d.name+ ": " + d.value + "</text>"  } )
+
     var svg = d3.select("body")
     	.append("svg")
     	.attr("width", width + margin.left + margin.right)
     	.attr("height", height + margin.top + margin.bottom)
     	.append("g")//welchen Sinn macht das, wenn nachher auch noch eine gruppe reinkommt?
     	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    svg.call(tip);
 
     d3.csv("Medienfinanzierung3.csv", function(error, data){
 
@@ -79,7 +88,7 @@ Vergleiche DE außerhalb der Grafik?
     	var umsaetze = data.map( key('mediaValues') ).map( function( d ) { return d[0] } ).map( key( 'value') );
     	var mitarbeiter = data.map( key('mediaValues') ).map( function( d ) { return d[1] } ).map( key( 'value') );
     	y0.domain([0, d3.max(umsaetze)]);
-    	y1.domain([0, d3.max(mitarbeiter)])
+    	y1.domain([0, d3.max(mitarbeiter)+500])
 
     	/*
     	svg.append("g")
@@ -119,11 +128,11 @@ Vergleiche DE außerhalb der Grafik?
     		.call(yAxis2)
        		.append("text")
     		.attr("transform", "rotate(-90)")
-            .attr("x", -110)
+            .attr("x", -108)
     		.attr("y", 6)
     		.attr("dy", "0.71em")
     		.style("text-anchor", "end")
-    		.text("Mitarbeiter");
+    		.text("Angestellte");
 
     	var unternehmen = svg.selectAll(".unternehmen")
     		.data(data)
@@ -152,7 +161,11 @@ Vergleiche DE außerhalb der Grafik?
     		 }
     			return half - y0(d.value)
     		})
-    		.attr("fill", function(d){ return color(d.name); });
+    		.attr("fill", function(d){ return color(d.name); })
+            .on("mouseover", tip.show)
+            .on("mouseout", tip.hide);
+
+            //remove de-tip.n divs...die behindern das neue mousover!
 
     	unternehmen.append( 'text' )
     	    .attr( 'class', 'label' )
