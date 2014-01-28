@@ -10,7 +10,6 @@ Wie kann ich einen Radn um "background2" machen? das CSS wird zwar angewendet ab
 
 TODO
 SORTING - aber das müsste eigentlich mit einer dritten Kategorie passieren
-Labels: DE und AT
 Verhältnisse MA/Umsatz, statt MA absolut?
 andere ÖR (ARD, NDR etc.?) - siehe tabele 3
 Wie DE abheben?
@@ -122,6 +121,15 @@ Wie DE abheben?
 			.attr("y1", half )
 			.attr("y2", half );
 
+        svg.append("text")
+            .attr("y", height)
+            .attr("x", 230)
+            .text("ÖSTERREICH");
+
+        svg.append("text")
+            .attr("y", height)
+            .attr("x", 630)
+            .text("DEUTSCHLAND");
 
     	svg.append("g")
     		.attr("class", "y axis")
