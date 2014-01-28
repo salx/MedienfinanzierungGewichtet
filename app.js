@@ -153,6 +153,7 @@ Wie DE abheben?
     		.style("text-anchor", "end")
     		.text("Angestellte");
 
+
     	var unternehmen = svg.selectAll(".unternehmen")
     		.data(data)
     		.enter()
@@ -183,9 +184,8 @@ Wie DE abheben?
     		})
     		.attr("fill", function(d){ return color(d.name); })
             .on("mouseover", tip.show)
-            .on("mouseout", tip.hide);
-
-            //remove de-tip.n divs...die behindern das neue mousover!
+            //.on("mouseout", tip.hide
+            //remove de-tip.n divs...die behindern das neue mousover! daher hier noc ohne mouseout.
 
     	unternehmen.append( 'text' )
     	    .attr( 'class', 'label' )
