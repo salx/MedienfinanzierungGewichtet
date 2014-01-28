@@ -157,6 +157,7 @@ Wie DE abheben?
     		.data(function(d){ return d.mediaValues; })
     		.enter()
     		.append("rect")
+            .attr("class", "bar")
     		.attr("width", x0.rangeBand())
     		//.attr("x", function(d){ return x0(d.name); })
     		.attr("y", function(d){ 
@@ -187,7 +188,17 @@ Wie DE abheben?
     	    .attr("transform", "rotate(-90)")
     	    .text( function(d) { return d.Unternehmen } );
 
+        d3.selectAll("li").on("click", change);
+
     })
+
+    function change(){
+        var input = this.id;
+        d3.selectAll("li.selected")
+            .attr("class", "");
+        d3.select(this)
+            .attr("class", "selected");
+    }
 
 
 })();
