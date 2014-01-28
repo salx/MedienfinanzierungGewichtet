@@ -206,7 +206,9 @@ SORTING - aber das müsste eigentlich mit einer dritten Kategorie passieren
     	    .attr( 'x', function(d) { return 0-y0(d.mediaValues[0].value) +5 })
     	    .attr("text-anchor", "start")
     	    .attr("transform", "rotate(-90)")
-    	    .text( function(d) { return d.Unternehmen } );
+    	    .text( function(d) { return d.Unternehmen } )
+            //.on("mouseover", tip.show)
+            //.on("mouseout", tip.hide);
 
         d3.selectAll("li").on("click", change);
 
