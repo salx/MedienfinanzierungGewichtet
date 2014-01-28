@@ -57,7 +57,7 @@ Wie DE abheben?
 
     var tip = d3.tip()
         .attr("class", "d3-tip")
-        .offset([-10,-10])
+        .offset([-10,0])
         .html( function(d){console.log(d); return "<text>2012</br>" + d.name+ ": " + d.value + "</text>"  } )
 
     var svg = d3.select("body")
