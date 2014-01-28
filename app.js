@@ -119,6 +119,7 @@ Vergleiche DE außerhalb der Grafik?
     		.call(yAxis2)
        		.append("text")
     		.attr("transform", "rotate(-90)")
+            .attr("x", -110)
     		.attr("y", 6)
     		.attr("dy", "0.71em")
     		.style("text-anchor", "end")
