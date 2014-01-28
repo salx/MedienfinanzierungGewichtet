@@ -3,15 +3,14 @@ Feedback Gerd
 
 Feedback Grafik:
 y-Achse: Orientierungslinien - gepunktet/strichliert gar nicht?
-TRennung DE-AT: wie am Besten?
-Farben? BIlder, Icvons?
+TRennung DE-AT: wie am Besten? (eingekastelt?)
 
 Fragen SiFu:
- Wie drehe ich da das hover ab??, wie mache ich einen Rand links?
+Wie kann ich einen Radn um "background2" machen? das CSS wird zwar angewendet aber ist nicht sichtbar 
 
 TODO
 SORTING - aber das müsste eigentlich mit einer dritten Kategorie passieren
-Vergleiche DE außerhalb der Grafik?
+Labels: DE und AT
 Verhältnisse MA/Umsatz, statt MA absolut?
 andere ÖR (ARD, NDR etc.?) - siehe tabele 3
 Wie DE abheben?
